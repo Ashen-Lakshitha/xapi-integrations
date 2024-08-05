@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Booking API 4",
+    "title": "Booking API 5",
     "description": "This service.",
     "termsOfService": "https://developer.io/terms",
     "contact": {
