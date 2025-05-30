@@ -1,0 +1,88 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Online Banking API",
+    "version": "1.0.0",
+    "description": "API for managing bank accounts and transactions"
+  },
+  "paths": {
+    "/accounts": {
+      "get": {
+        "summary": "Get all accounts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "https://dev.xapihub.io/models/WWE/Shield-Catalog/6064/v1/#/components/SCHEMAS/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new account"
+      }
+    },
+    "/accounts/{accountId}": {
+      "get": {
+        "summary": "Get account details by ID"
+      },
+      "put": {
+        "summary": "Update account details by ID"
+      },
+      "delete": {
+        "summary": "Delete account by ID"
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Get all transactions"
+      },
+      "post": {
+        "summary": "Create a new transaction"
+      }
+    }
+  },
+  "webhooks": {},
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number"
+          },
+          "ownerId": {
+            "type": "string"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {},
+    "links": {},
+    "callbacks": {},
+    "pathItems": {}
+  }
+}
