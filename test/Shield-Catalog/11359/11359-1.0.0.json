@@ -1,0 +1,219 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Xapi Testing Spec 1.0",
+    "summary": "QA testing and automation",
+    "description": "This is a sample API This is a sample Pet Store Server based on the OpenAPI 3.1 specification. You can find out more about\\n\\nXAPI at \\[[http://swagger.io\\\\]](http://swagger.io) (API Documentation & Design Tools for Teams | Swagger ). \\n\\nSome useful links:\\n- The Pet Store repository\\n- The source API definition for the Pet Store \\n\\\\\\* \\n\\n This is a sample Coffee Shop Server based on the OpenAPI 3.1 specification. \\n It's the first version and includes several areas, such as 'Menu', 'Order', 'User', 'Inventory', 'Notification', and more. We plan to add more features in the future. \\n Please refer to this sample and help us improve it. If you want to learn more about OpenAPI, you can follow the link to XapiiHub.\\n\\nSome useful links:\\n1. The Pet Store repository\\n - Test1 \\n - Test2 \\n 2. The source API definition for the Pet Store \\n- First item \\n - Second item \\n- Third item \\n - Indented item1 \\n - Indented item \\n- Fourth item \\n > Blockquote \\n Preview unavailable",
+    "contact": {
+      "name": "XAPI",
+      "url": "https://www.x-venture.io/",
+      "email": "xapi.product@x-venture.io"
+    },
+    "license": {
+      "name": "Apache 2.0"
+    },
+    "version": "10"
+  },
+  "servers": [
+    {
+      "url": "https://dev.xapihub.io",
+      "description": "QA enviornment spcific server"
+    },
+    {
+      "url": "https://stage.xapihub.io/v2",
+      "description": "QA enviornment spcific server",
+      "variables": {
+        "port": {
+          "default": "https",
+          "description": "Either https or http"
+        },
+        "env": {
+          "enum": [
+            "stage",
+            "prod"
+          ],
+          "default": "stage",
+          "description": "this value is assigned by the service provider, in this example gigantic-server.com"
+        },
+        "version": {
+          "default": "v2"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/items": {
+      "summary": "This is sample Pathitem based on Items.",
+      "description": "Fetches a paginated list of items available in the system. Supports optional filtering and sorting parameters to customize the results.",
+      "servers": [
+        {
+          "url": "https://dev.xapihub.io",
+          "description": "QA enviornment spcific server"
+        },
+        {
+          "url": "https://stage.xapihub.io/v2",
+          "description": "QA enviornment spcific server",
+          "variables": {
+            "port": {
+              "default": "https",
+              "description": "Either https or http"
+            },
+            "env": {
+              "enum": [
+                "stage",
+                "prod"
+              ],
+              "default": "stage",
+              "description": "this value is assigned by the service provider, in this example gigantic-server.com"
+            },
+            "version": {
+              "default": "v2"
+            }
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "name": "queryPara",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "example": "AbC"
+          },
+          "required": true,
+          "allowEmptyValue": true,
+          "allowReserved": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a list of items",
+        "operationId": "getItems",
+        "security": [
+          {
+            "apiKeyAuth": []
+          },
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "cookie",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of items"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new item",
+        "operationId": "createItem",
+        "security": [
+          {
+            "apiKeyAuth": []
+          },
+          {
+            "bearerAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "cookie",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item created successfully"
+          }
+        }
+      }
+    }
+  }
+}
